@@ -1,29 +1,86 @@
 <html>
-
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
 
 <body>
+
+    <input type="text" placeholder="Search.." name="search" value="Fargo" id="search">
+    <button type="submit" onclick="getWeatherGo()">Search your city name!</button>
+
+    <div id="mainTemp">weather box</div>
+    <div id="maxTemp"></div>
+    <div id="minTemp"></div>
+    <div id="feelsLike"></div>
+    <div id="humidity"></div>
+    <div id="cloudy"></div>
+    <div id="weather"></div>
+    <div id="weatherDescription"></div>
     
 
 <script>
+
+
+
+    let search = document.getElementById("search").value;
     let storage = undefined;
+    let API = `https://api.openweathermap.org/data/2.5/weather?q=Fargo&appid=84f0fb1b9f95672b4ac8058f301b9c23`
+    function getWeatherGo(){
+        search = document.getElementById("search").value;
+        API = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=84f0fb1b9f95672b4ac8058f301b9c23`
+        getWeather();
+    }
+    
+    
     async function getWeather() {
-    const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Fargo&appid=84f0fb1b9f95672b4ac8058f301b9c23', {mode: 'cors'});
-    const catData = await response.json();
+    
+    
+    let response = await fetch(API, {mode: 'cors'});
+    let catData = await response.json();
+    
     console.log(catData);
     storage = catData;
-    console.log(storage.main.temp);
-    console.log(storage.main.temp_max);
-    console.log(storage.main.temp_min);
-    console.log(storage.main.feels_like);
-    console.log(storage.main.humidity);
-    console.log(storage.clouds.all);
-    console.log(storage.weather[0].main);
-    console.log(storage.weather[0].description);
+
+
+    let mainTemp = (storage.main.temp - 273.15) * 9/5 +32;
+    let maxTemp = (storage.main.temp_max - 273.15) * 9/5 +32;
+    let minTemp = (storage.main.temp_min - 273.15) * 9/5 +32;
+    let feelsLike = (storage.main.feels_like - 273.15) * 9/5 +32;
+    let humidity = storage.main.humidity;
+    let cloudy = storage.clouds.all;
+    let weather = storage.weather[0].main;
+    let weatherDescription = storage.weather[0].description;
+
+    console.log(mainTemp);
+    console.log(maxTemp);
+    console.log(minTemp);
+    console.log(feelsLike);
+    console.log(humidity);
+    console.log(cloudy);
+    console.log(weather);
+    console.log(weatherDescription);
+
+    let mainTempBox = document.getElementById("mainTemp");
+    let maxTempBox = document.getElementById("maxTemp");
+    let minTempBox = document.getElementById("minTemp");
+    let feelsLikeBox = document.getElementById('feelsLike');
+    let humidityBox = document.getElementById('humidity');
+    let cloudyBox = document.getElementById('cloudy');
+    let weatherBox = document.getElementById('weather');
+    let weatherDescriptionBox = document.getElementById('weatherDescription');
+    mainTempBox.innerHTML = mainTemp;
+    maxTempBox.innerHTML = maxTemp;
+    minTempBox.innerHTML = minTemp;
+    feelsLikeBox.innerHTML = feelsLike;
+    humidityBox.innerHTML = humidity;
+    cloudyBox.innerHTML = cloudy;
+    weatherBox.innerHTML = weather;
+    weatherDescriptionBox.innerHTML = weatherDescription;
 
 
 };
 
-getWeather();
+
 </script>
 </body>
 </html>
