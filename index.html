@@ -1,6 +1,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
+    <!--Going to just make this a single html page, no need to overcomplicate this simple app for myself-->
 </head>
 
 <body>
@@ -41,13 +42,12 @@
     console.log(catData);
     storage = catData;
 
-
-    let mainTemp = (storage.main.temp - 273.15) * 9/5 +32;
-    let maxTemp = (storage.main.temp_max - 273.15) * 9/5 +32;
-    let minTemp = (storage.main.temp_min - 273.15) * 9/5 +32;
-    let feelsLike = (storage.main.feels_like - 273.15) * 9/5 +32;
-    let humidity = storage.main.humidity;
-    let cloudy = storage.clouds.all;
+        //manual declaring seems fine here. 
+    let mainTemp = (storage.main.temp - 273.15) * 9/5 +32 + " Fahrenheit";
+    let maxTemp = (storage.main.temp_max - 273.15) * 9/5 +32 + " Fahrenheit";
+    let minTemp = (storage.main.temp_min - 273.15) * 9/5 +32 + " Fahrenheit";
+    let feelsLike = (storage.main.feels_like - 273.15) * 9/5 +32 + " Fahrenheit";
+    let humidity = storage.main.humidity + "% Humidity";
     let weather = storage.weather[0].main;
     let weatherDescription = storage.weather[0].description;
 
