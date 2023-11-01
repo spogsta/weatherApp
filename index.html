@@ -5,16 +5,16 @@
 </head>
 
 <body>
-
+<!--Creating button, search box, and divs to hold weather information-->
     <input type="text" placeholder="Search.." name="search" value="Fargo" id="search">
     <button type="submit" onclick="getWeatherGo()">Search your city name!</button>
 
-    <div id="mainTemp">weather box</div>
+    <div id="mainTemp"></div>
     <div id="maxTemp"></div>
     <div id="minTemp"></div>
     <div id="feelsLike"></div>
     <div id="humidity"></div>
-    <div id="cloudy"></div>
+    
     <div id="weather"></div>
     <div id="weatherDescription"></div>
     
@@ -22,7 +22,7 @@
 <script>
 
 
-
+//using the API to get weather information. (this is not best practice, I am aware)
     let search = document.getElementById("search").value;
     let storage = undefined;
     let API = `https://api.openweathermap.org/data/2.5/weather?q=Fargo&appid=84f0fb1b9f95672b4ac8058f301b9c23`
@@ -32,48 +32,50 @@
         getWeather();
     }
     
-    
+    //async use
     async function getWeather() {
     
-    
+    //returning api request
     let response = await fetch(API, {mode: 'cors'});
     let catData = await response.json();
-    
+    //a great way to see how the data is returned
     console.log(catData);
     storage = catData;
 
-        //manual declaring seems fine here. 
-    let mainTemp = (storage.main.temp - 273.15) * 9/5 +32 + " Fahrenheit";
-    let maxTemp = (storage.main.temp_max - 273.15) * 9/5 +32 + " Fahrenheit";
-    let minTemp = (storage.main.temp_min - 273.15) * 9/5 +32 + " Fahrenheit";
-    let feelsLike = (storage.main.feels_like - 273.15) * 9/5 +32 + " Fahrenheit";
+    //manual declaring each temp, could use an array to but...ehhhhh.
+    let mainTemp = (storage.main.temp - 273.15) * 9/5 +32;
+    let maxTemp = (storage.main.temp_max - 273.15) * 9/5 +32;
+    let minTemp = (storage.main.temp_min - 273.15) * 9/5 +32;
+    let feelsLike = (storage.main.feels_like - 273.15) * 9/5 +32;
     let humidity = storage.main.humidity + "% Humidity";
     let weather = storage.weather[0].main;
     let weatherDescription = storage.weather[0].description;
 
+    
+    //loggin for my own use.
     console.log(mainTemp);
     console.log(maxTemp);
     console.log(minTemp);
     console.log(feelsLike);
     console.log(humidity);
-    console.log(cloudy);
     console.log(weather);
     console.log(weatherDescription);
 
+    //declaring an object for each html element 
     let mainTempBox = document.getElementById("mainTemp");
     let maxTempBox = document.getElementById("maxTemp");
     let minTempBox = document.getElementById("minTemp");
     let feelsLikeBox = document.getElementById('feelsLike');
     let humidityBox = document.getElementById('humidity');
-    let cloudyBox = document.getElementById('cloudy');
     let weatherBox = document.getElementById('weather');
     let weatherDescriptionBox = document.getElementById('weatherDescription');
-    mainTempBox.innerHTML = mainTemp;
-    maxTempBox.innerHTML = maxTemp;
-    minTempBox.innerHTML = minTemp;
-    feelsLikeBox.innerHTML = feelsLike;
+
+    //putting the returned info into those HTML elements, also rounding Fahrenheit to 1 decimal point.
+    mainTempBox.innerHTML = "The temp is " + parseFloat(mainTemp).toFixed(1) + " Fahrenheit";; 
+    maxTempBox.innerHTML = "Max temp is " + parseFloat(maxTemp).toFixed(1) + " Fahrenheit";;
+    minTempBox.innerHTML = "Min temp is " + parseFloat(minTemp).toFixed(1) + " Fahrenheit";
+    feelsLikeBox.innerHTML ="It feels like " + parseFloat(feelsLike).toFixed(1) + " Fahrenheit";
     humidityBox.innerHTML = humidity;
-    cloudyBox.innerHTML = cloudy;
     weatherBox.innerHTML = weather;
     weatherDescriptionBox.innerHTML = weatherDescription;
 
@@ -84,5 +86,3 @@
 </script>
 </body>
 </html>
-
-
