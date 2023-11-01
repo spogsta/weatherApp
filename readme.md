@@ -1,5 +1,3 @@
-A fun api testing project with asyn calls and JSON
+Consdering this complete, it's design isn't AMAZING, but it's functional. I cleaned some things up after not looking at this project for a few years. Just stumbled upon it and wanted to fix it. 
 
-console.logging for now.
-
-need to style and webpack, but the project is now functional. I need to clean up my functions - i basically have one function do everything. 
+It's just a test on using a webAPI to perform a simple task. 
