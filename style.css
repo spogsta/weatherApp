@@ -1,37 +1,45 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  /* Style the search field */
-  form.example input[type=text] {
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f2f2f2;
+}
+
+#main-container {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"] {
+    width: 100%;
     padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-  }
-  
-  /* Style the submit button */
-  form.example button {
-    float: left;
-    width: 20%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
     padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none; /* Prevent double borders */
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-  }
-  
-  form.example button:hover {
-    background: #0b7dda;
-  }
-  
-  /* Clear floats */
-  form.example::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.weather-info {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.weather-info div {
+    margin-bottom: 10px;
+}
